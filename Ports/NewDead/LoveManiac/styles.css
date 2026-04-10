@@ -1,0 +1,20 @@
+/* Minimal, touch-friendly layout that fills the screen with the iframe */
+:root{
+  background: #000;
+}
+html,body{
+  height:100%;
+  margin:0;
+  -webkit-user-select:none;
+  user-select:none;
+  touch-action: manipulation;
+  background:#000;
+}
+#gameFrame{
+  display:block;
+  width:100vw;
+  height:100vh;
+  border:0;
+  background:#000;
+  -webkit-tap-highlight-color: transparent;
+}

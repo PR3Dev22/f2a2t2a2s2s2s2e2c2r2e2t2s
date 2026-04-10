@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <link rel="icon" href="Love Maniac.icon.png" />
+  <title>Love Maniac</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <iframe id="gameFrame" src="Love Maniac.html" frameborder="0" allow="fullscreen; autoplay; clipboard-write" sandbox="allow-scripts allow-same-origin allow-forms allow-popups" ></iframe>
+
+  <script>
+    // Ensure iframe always fits viewport and prevents scrolling in the parent
+    const iframe = document.getElementById('gameFrame');
+    function resize() {
+      iframe.style.width = window.innerWidth + 'px';
+      iframe.style.height = window.innerHeight + 'px';
+    }
+    addEventListener('resize', resize);
+    resize();
+
+    // Forward orientation and visibility hints to the iframe for better mobile UX
+    addEventListener('visibilitychange', () => {
+      iframe.contentWindow?.postMessage({ type: 'visibility', hidden: document.hidden }, '*');
+    });
+    addEventListener('orientationchange', () => {
+      iframe.contentWindow?.postMessage({ type: 'orientation', angle: screen.orientation?.angle ?? window.orientation }, '*');
+    });
+
+    // Quick focus tap for mobile to enable keyboard/gamepad input
+    document.addEventListener('touchstart', function once() {
+      iframe.focus();
+      document.removeEventListener('touchstart', once);
+    }, {passive:true});
+  </script>
+</body>
+</html>
